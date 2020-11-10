@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "dev_dice": "nodemon dice.js",
+    "dev_user": "nodemon userPost.js"
   },
   "author": "",
   "license": "ISC",
