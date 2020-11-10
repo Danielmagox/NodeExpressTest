@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "name": "Taxi Driver",
+    "categoria": "Cine Negro",
+    "like": false
+  },
+  {
+    "id": 2,
+    "name": "El Padrino",
+    "categoria": "Drama",
+    "like": true
+  },
+  {
+    "id": 3,
+    "name": "GoodFellas",
+    "categoria": "Mafia",
+    "like": true
+  },
+  {
+    "id": 4,
+    "name": "American Pie",
+    "categoria": "Comedia",
+    "like": true
+  }
+]

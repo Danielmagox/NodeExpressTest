@@ -1,14 +1,23 @@
 const express = require("express");
 const app = express();
-
+const fs = require("fs");
 app.use(express.json());
 
-const moviesDB = [
-  { id: 1, name: "Taxi Driver", categoria: "Cine Negro", like: false },
-  { id: 2, name: "El Padrino", categoria: "Drama", like: true },
-  { id: 3, name: "GoodFellas", categoria: "Mafia", like: true },
-  { id: 4, name: "American Pie", categoria: "Comedia", like: true },
-];
+let moviesDB = [];
+
+const loadDatabase = () => {
+  return new Promise((resolve, reject) => {
+    fs.readFile("./database.json", (err, data) => {
+      if (err) {
+        reject("An error ocurred on file opening");
+      } else {
+        moviesDB = JSON.parse(data.toString());
+        resolve();
+      }
+    });
+  });
+};
+
 // Esto se hace con el PostMan
 //creamos ID para las peliculas
 app.post("/movie", (req, res) => {
@@ -35,6 +44,7 @@ app.get("/movie/unlike", (req, res) => {
   res.json(likedDDBB);
 });
 
+//http://localhost:3000/movie/like/3 EN POSTMAN POR EJEMPLO
 app.put("/movie/like/:id", (req, res) => {
   let id = Number(req.params.id);
   let movieEditIndex = moviesDB.findIndex((movie) => movie.id === id);
@@ -71,4 +81,6 @@ app.get("/", (req, res) => {
   res.json();
 });
 
-app.listen(3000, () => console.log("Listen on port 3000"));
+loadDatabase().then(() => {
+  app.listen(3000, () => console.log("Listen on port 3000"));
+});
